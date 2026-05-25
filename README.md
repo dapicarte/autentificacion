@@ -10,7 +10,7 @@ Verifica las credenciales del usuario contra el MS Usuario.
 **JSON de entrada:**
 ```json
 {
-    "correo": "daniela.picarte@gmail.com",
+    "correo": "da.picarte@duocuc.cl",
     "password": "123456A"
 }
 ```
@@ -32,7 +32,7 @@ Lista todos los registros de login almacenados.
 [
     {
         "idAutentificacion": 1,
-        "correo": "daniela.picarte@gmail.com",
+        "correo": "da.picarte@duocuc.cl",
         "password": "123456A",
         "fechaLogin": "2026-05-25",
         "idUsuario": 1
