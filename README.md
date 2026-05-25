@@ -1,5 +1,9 @@
-# Microservicio de Autentificacion
-## server.port= 8094
+# Microservicio de Autentificación
+
+## server.port=8094
+
+## Endpoints
+
 ### POST `/api/v1/autentificacion/login`
 Verifica las credenciales del usuario contra el MS Usuario.
 
@@ -23,7 +27,7 @@ Verifica las credenciales del usuario contra el MS Usuario.
 ### GET `/api/v1/autentificacion`
 Lista todos los registros de login almacenados.
 
-**Respuesta exitosa:**
+**Respuesta:**
 ```json
 [
     {
@@ -41,4 +45,4 @@ Lista todos los registros de login almacenados.
 ## Dependencias
 | MS | Puerto | Para qué |
 |---|---|---|
-| MS Usuario | 8083 | Verificar credenciales |
+| MS Usuario | 8083 | Verificar credenciales del usuario |
