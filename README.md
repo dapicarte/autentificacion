@@ -1,2 +1,2 @@
 # Microservicio de Autentificacion
-## server.port= 8094
+server.port= 8094
