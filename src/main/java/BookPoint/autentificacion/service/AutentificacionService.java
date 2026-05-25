@@ -1,10 +1,12 @@
 package BookPoint.autentificacion.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import BookPoint.autentificacion.model.Autentificacion;
@@ -22,7 +24,7 @@ public class AutentificacionService {
 
     public String login(Autentificacion autentificacion) {
         try {
-            String urlUsuario = "http://localhost:8083/api/usuarios/correo/" + autentificacion.getCorreo();
+            String urlUsuario = "http://localhost:8083/api/usuarios/emailCliente/" + autentificacion.getCorreo();
             UsuarioDTO usuario = restTemplate.getForObject(urlUsuario, UsuarioDTO.class);
 
             if (usuario == null) {
@@ -32,8 +34,8 @@ public class AutentificacionService {
             if (!usuario.getPassword().equals(autentificacion.getPassword())) {
                 return "Credenciales incorrectas";
             }
-            autentificacion.setIdUsuario(usuario.getId());
-            autentificacion.setFechaLogin(LocalDate.now());
+            autentificacion.setIdUsuario(usuario.getIdUsuario());
+            autentificacion.setFechaLogin(LocalDateTime.now());
             autentificacionRepository.save(autentificacion);
 
             System.out.println("*************************");
@@ -42,11 +44,13 @@ public class AutentificacionService {
 
             return "Bienvenido " + usuario.getNombre() + " " + usuario.getApellido()+ ", su rol es: " + usuario.getRol();
 
+        } catch (HttpClientErrorException.NotFound e) {
+            return "Credenciales incorrectas";
         } catch (Exception e) {
             System.out.println("*************************");
             System.out.println("Usuario no disponible: " + e.getMessage());
             System.out.println("*************************");
-            return "Servicio de autentificacion no disponible, intente mas tarde";
+            throw new RuntimeException("Servicio de autentificacion no disponible, intente mas tarde") ;
         }
     }
 

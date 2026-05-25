@@ -1,6 +1,7 @@
 package BookPoint.autentificacion.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,7 +30,7 @@ public class Autentificacion {
     private String password;
 
     @Column(nullable = false)
-    private LocalDate fechaLogin;
+    private LocalDateTime fechaLogin;
 
     @Column(nullable = true)
     private Long idUsuario;
