@@ -2,6 +2,7 @@ package BookPoint.autentificacion.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,26 @@ public class AutentificacionService {
 
     public List<Autentificacion> listarLogins() {
         return autentificacionRepository.findAll();
+    }
+
+    public Optional<Autentificacion> findById(Long id){
+        return autentificacionRepository.findById(id);
+    }
+
+    public Autentificacion modificar(Long id, Autentificacion autentificacion){
+        Autentificacion buscado = autentificacionRepository.findById(id).orElse(null);
+        if(buscado == null) return null;
+        buscado.setCorreo(autentificacion.getCorreo());
+        buscado.setPassword(autentificacion.getPassword());
+        return autentificacionRepository.save(buscado);
+    }
+
+    public boolean eliminar(Long id){
+        if(autentificacionRepository.existsById(id)){
+            autentificacionRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
 
